@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <BrowserRouter>
+        <BrowserRouter basename={'/react-quiz-with-vite/'}>
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/questions" element={<Questions />}></Route>
