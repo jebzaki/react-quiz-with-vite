@@ -17,7 +17,6 @@ const Questions = () => {
   });
 
   useEffect(() => {
-    console.log(currentQuestion, quiz.length);
     if (typeof quiz != 'undefined' && quiz.length > 0 && typeof currentQuestion != 'undefined') {
       if (currentQuestion < quiz.length) setQuestion(quiz[currentQuestion]);
     }
@@ -48,10 +47,10 @@ const Questions = () => {
               {decode(question.question)}
             </div>
             <div className="flex justify-around">
-              <button className="bg-green-600 text-white px-6 py-4 rounded" onClick={() => answerQuestion(true)}>
+              <button className="bg-green-600 text-white px-12 py-4 rounded" onClick={() => answerQuestion(true)}>
                 True
               </button>
-              <button className="bg-red-600 text-white px-6 py-4 rounded" onClick={() => answerQuestion(false)}>
+              <button className="bg-red-600 text-white px-12 py-4 rounded" onClick={() => answerQuestion(false)}>
                 False
               </button>
             </div>

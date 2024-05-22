@@ -40,7 +40,7 @@ const Results = () => {
   return (
     <div className="h-lvh flex flex-col">
       <div className="flex justify-center items-center m-6">
-        <button onClick={restartQuiz} className="rounded uppercase p-4 bg-green-600 text-white text-2xl ">
+        <button onClick={restartQuiz} className="rounded capitalize p-4 w-full max-w-96 bg-green-600 text-white text-2xl ">
           play again?
         </button>
       </div>
@@ -58,7 +58,7 @@ const Results = () => {
             {quiz.map((element, i) => {
               return (
                 <div key={i}>
-                  #{i + 1} {decode(element.question)} <span className="font-semibold">{results[i] ? 'Correct' : 'Incorrect'}</span>
+                  #{i + 1}, {decode(element.question)} <span className="font-semibold">{results[i] ? 'Correct' : 'Incorrect'}</span>
                 </div>
               );
             })}

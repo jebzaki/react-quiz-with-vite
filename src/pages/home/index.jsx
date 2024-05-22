@@ -12,11 +12,18 @@ const Home = () => {
   const dispatchEvent = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [difficulty, setDifficulty] = useState('Easy');
+  const [quizLength, setQuizLength] = useState(10);
+
+  const difficulties = ['Easy', 'Medium', 'Hard'];
+  const quizLengths = [10, 20, 30];
+
+  useEffect(() => {}, []);
 
   const loadQuiz = async () => {
     setIsLoading(true);
     try {
-      await getQuiz().then((data) => {
+      await getQuiz(quizLength, difficulty.toLowerCase()).then((data) => {
         if (data) {
           dispatchEvent({ type: actions.LOAD_QUIZ, quiz: data.results });
           navigate('/questions');
@@ -30,10 +37,12 @@ const Home = () => {
     setIsLoading(false);
   };
 
-  useEffect(() => {}, []);
+  const handleDifficultyChange = (event) => {
+    setDifficulty(event.target.value);
+  };
 
-  const startQuiz = () => {
-    loadQuiz();
+  const handleQuizLengthChange = (event) => {
+    setQuizLength(event.target.value);
   };
 
   return (
@@ -48,9 +57,38 @@ const Home = () => {
             <img src={reactLogo} className="logo react h-32 p-2" alt="React logo" />
           </a>
         </div>
-        <button disabled={isLoading} onClick={startQuiz} className="rounded uppercase p-4 bg-green-600 text-white text-2xl ">
-          start
-        </button>
+
+        <div className="max-w-96 w-full mt-2 px-4 flex flex-col">
+          <label htmlFor="difficulty">Difficulty</label>
+          <select value={difficulty} onChange={handleDifficultyChange} name="difficulty" className="p-4 rounded">
+            {difficulties.map((item) => {
+              return (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
+        <div className="max-w-96 w-full mt-2 px-4 flex flex-col">
+          <label htmlFor="quizLength">Quiz Length</label>
+          <select value={quizLength} onChange={handleQuizLengthChange} name="quizLength" className="p-4 rounded">
+            {quizLengths.map((item) => {
+              return (
+                <option value={item} key={item}>
+                  {item} questions
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
+        <div className="max-w-96 w-full mt-2 px-4 flex flex-col">
+          <button disabled={isLoading} onClick={loadQuiz} className="rounded capitalize p-4 mt-4 w-full bg-green-600 text-white text-2xl transition-opacity disabled:opacity-40">
+            start
+          </button>
+        </div>
       </div>
     </div>
   );
